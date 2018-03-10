@@ -56,6 +56,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const inProduction = (process.env.NODE_ENV === 'production');
 
 module.exports = {
+    //webpack has a four major part: entry, output, module, and plugins
     entry: {
             app: './src/app.js', 
     },
@@ -107,7 +108,7 @@ module.exports = {
     ],
     devtool: 'source-map',
 };
-//add this when we webpack in production mode
+//This part load only when NODE_ENV equal to `production`
 if (inProduction){
     //uglify, in other means minify the javascript files.
     module.exports.plugins.push(
@@ -116,15 +117,16 @@ if (inProduction){
     module.exports.plugins.push(
         new webpack.LoaderOptionsPlugin({
             minimize: true
-            //if use PurifyCSSPlugin this is ignore, you must write minimize: true after paths
+            //if use PurifyCSSPlugin this is ignored, you must write minimize: true after `paths`
         })
     );
     module.exports.plugins.push(
         // Make sure this is after ExtractTextPlugin!
         new PurifyCSSPlugin({
             // Give paths to parse for rules. These should be absolute!
-            paths: glob.sync(path.join(__dirname, 'index.html')),
             //glob.sync create a list of fiels recursively
+            paths: glob.sync(path.join(__dirname, 'index.html')),
+
             minimize: inProduction,
         }))
     
