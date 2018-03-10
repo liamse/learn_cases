@@ -2,4 +2,4 @@
 - webpack
     - Webpack configuration to use Babel and SASS and HTML Template
 - webpack-workbox
-    - Webpack configurationto use WorkBox (Service Workers in projcet)
+    - Webpack configuration to use WorkBox (Service Workers in projcet)
