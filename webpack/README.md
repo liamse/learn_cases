@@ -20,6 +20,7 @@ Required modules to following configuration work is:
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.2",
     "webpack": "^3.1.0",
+    "webpack-cli": "^2.0.10",
 ```
 This configuration need to have following folder structure:
 ```
