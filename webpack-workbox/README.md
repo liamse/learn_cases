@@ -119,12 +119,12 @@ module.exports = {
             swDest: path.join('dist','sw.js'),
             clientsClaim: true,
             skipWaiting: true,
-            runtimeCaching: [
-                {
-                    urlPattern: new RegExp('dist/'),
-                    handler: 'distFolder'
-                }
-            ]
+            // runtimeCaching: [
+            //     {
+            //         urlPattern: new RegExp('dist/'),
+            //         handler: 'distFolder'
+            //     }
+            // ]
         })
     ],
     devtool: 'source-map',
