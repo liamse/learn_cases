@@ -1,6 +1,9 @@
 ## webpack configuration
 
-Required modules to following configuration work is: 
+### Required Modules
+Your `package.json` must have following packages to this configuration work properly. 
+
+`webpack` package version is important, if you install version `4.X.X` some of these packages don't supprot it yet.
 ```js
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.3",
