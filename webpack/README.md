@@ -70,12 +70,12 @@ new HtmlWebpackPlugin({  // Also generate a test.html
     template: path.join(process.cwd(), 'src/index.html'),
     inject: 'body',
     minify: {
-        removeAttributeQuotes: true,
+        removeAttributeQuotes: true, //this is not good idea
         collapseWhitespace: true,
         html5: true,
-        minifyCSS: true,
-        removeComments: true,
-        removeEmptyAttributes: true,
+        minifyCSS: true, // This is not necessary because we minify it by PurifyCSS Plugin
+        removeComments: true, //this is useful. I write a lot of comments that don't want to upload on websites. Like names, dates, and somethings that help me to remember why I wrote this code, like an order number, or email that I receive.
+        removeEmptyAttributes: true, // this is not good idea, sometimes we need it.
     },
 }),
 ```
@@ -86,12 +86,10 @@ new HtmlWebpackPlugin({  // Also generate a test.html
     template: path.join(process.cwd(), 'src/index.html'),
     inject: 'body',
     minify: !inProudction ? false : {
-        removeAttributeQuotes: true,
         collapseWhitespace: true,
         html5: true,
         minifyCSS: true,
         removeComments: true,
-        removeEmptyAttributes: true,
     },
 }),
 ```
@@ -157,12 +155,10 @@ module.exports = {
         new HtmlWebpackPlugin({  // Also generate a test.html
             template: path.join(process.cwd(), 'src/index.html'),
             minify: !inProduction ? false : {
-                removeAttributeQuotes: true,
                 collapseWhitespace: true,
                 html5: true,
                 minifyCSS: true,
                 removeComments: true,
-                removeEmptyAttributes: true,
             },
             // filename: 'index.html',
             // inject: 'head'
