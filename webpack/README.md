@@ -3,7 +3,7 @@
 ### Required Modules
 Your `package.json` must have following packages to this configuration work properly. 
 
-`webpack` package version is important, if you install version `4.X.X` some of these packages don't supprot it yet.
+`webpack` package version is important, if you install version `4.X.X` some of these packages don't support it yet.
 ```js
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.3",
@@ -45,6 +45,55 @@ YOUR_MODULE_ROOT
         |-app.[chunkhash].js
         |-app.[chunkhash].js.map
         index.html
+```
+
+### HtmlWebpackPlugin
+HtmlWebpackPlugin create the dist/index.html file based on src/index.html template. It links `stylesheets` and `scripts` automatically. As default it `inject` css files in `<head>` and `<script>`s in body. We can specify to inject them in `<head>`.
+
+| Name | Type | Default | Description|
+|:--:|:--:|:-----:|:----------|
+| `inject` | `{boolean|string}` | true | `true || 'head' || 'body' || false` Inject all assets into the given template or templateContent. When passing true or 'body' all javascript resources will be placed at the bottom of the body element. 'head' will place the scripts in the head element|
+
+```js
+new HtmlWebpackPlugin({  // Also generate a test.html
+    template: path.join(process.cwd(), 'src/index.html'),
+    inject: 'body',
+}),
+```
+
+`inject : 'head'` run script before DOM completed. This make problem when you want to change DOM with your script. This is happen for me when I want to `render` react component into a `div`.
+#### html-minifier
+`HtmlWebpackPlugin` use [`html-minifier`](https://github.com/kangax/html-minifier) to minify HTML. To set properties of `html-minifier`, `HtmlWebpackPlugin` get an object in its `minify` property.
+
+```js
+new HtmlWebpackPlugin({  // Also generate a test.html
+    template: path.join(process.cwd(), 'src/index.html'),
+    inject: 'body',
+    minify: {
+        removeAttributeQuotes: true,
+        collapseWhitespace: true,
+        html5: true,
+        minifyCSS: true,
+        removeComments: true,
+        removeEmptyAttributes: true,
+    },
+}),
+```
+To use it only in Production mode:
+
+```js
+new HtmlWebpackPlugin({  // Also generate a test.html
+    template: path.join(process.cwd(), 'src/index.html'),
+    inject: 'body',
+    minify: !inProudction ? false : {
+        removeAttributeQuotes: true,
+        collapseWhitespace: true,
+        html5: true,
+        minifyCSS: true,
+        removeComments: true,
+        removeEmptyAttributes: true,
+    },
+}),
 ```
 
 ### webpack.config.js
@@ -106,7 +155,18 @@ module.exports = {
         new ExtractTextPlugin('css/style.[chunkhash].css'),
         
         new HtmlWebpackPlugin({  // Also generate a test.html
-            template: path.join(process.cwd(), 'src/index.html')
+            template: path.join(process.cwd(), 'src/index.html'),
+            minify: !inProduction ? false : {
+                removeAttributeQuotes: true,
+                collapseWhitespace: true,
+                html5: true,
+                minifyCSS: true,
+                removeComments: true,
+                removeEmptyAttributes: true,
+            },
+            // filename: 'index.html',
+            // inject: 'head'
+            
         }),
 
     ],
@@ -145,7 +205,7 @@ if (inProduction){
     ]
 }
 ```
-### How to run this configuration
+### How to use it
 In `package.json` add following scripts:
 ```
 scripts: [
