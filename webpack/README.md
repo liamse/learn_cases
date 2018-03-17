@@ -52,7 +52,7 @@ HtmlWebpackPlugin create the dist/index.html file based on src/index.html templa
 
 | Name | Type | Default | Description|
 |:--:|:--:|:-----:|:----------|
-| `inject` | ```{boolean|string}``` | true | `true || 'head' || 'body' || false` Inject all assets into the given template or templateContent. When passing true or 'body' all javascript resources will be placed at the bottom of the body element. 'head' will place the scripts in the head element|
+|**[`inject`](#)**|`{Boolean\|String}`|`true`|`true \|\| 'head' \|\| 'body' \|\| false` Inject all assets into the given `template` or `templateContent`. When passing `true` or `'body'` all javascript resources will be placed at the bottom of the body element. `'head'` will place the scripts in the head element|
 
 ```js
 new HtmlWebpackPlugin({  // Also generate a test.html
