@@ -4,6 +4,7 @@
 Your `package.json` must have following packages to this configuration work properly. 
 
 `webpack` package version is important, if you install version `4.X.X` some of these packages don't support it yet.
+
 ```js
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.3",
@@ -25,8 +26,10 @@ Your `package.json` must have following packages to this configuration work prop
     "webpack": "^3.1.0",
     "webpack-cli": "^2.0.10",
 ```
+
 This configuration need to have following folder structure:
-```
+
+```text
 YOUR_MODULE_ROOT
     |- src
        |- css
@@ -36,7 +39,8 @@ YOUR_MODULE_ROOT
 ```
 
 `dist/` folder is made like this:
-```
+
+```text
 YOUR_MODULE_ROOT
     |- dist
         |- css
@@ -48,6 +52,7 @@ YOUR_MODULE_ROOT
 ```
 
 ### HtmlWebpackPlugin
+
 HtmlWebpackPlugin create the dist/index.html file based on src/index.html template. It links `stylesheets` and `scripts` automatically. As default it `inject` css files in `<head>` and `<script>`s in body. We can specify to inject them in `<head>`.
 
 | Name | Type | Default | Description|
@@ -62,7 +67,9 @@ new HtmlWebpackPlugin({  // Also generate a test.html
 ```
 
 `inject : 'head'` run script before DOM completed. This make problem when you want to change DOM with your script. This is happen for me when I want to `render` react component into a `div`.
+
 #### html-minifier
+
 `HtmlWebpackPlugin` use [`html-minifier`](https://github.com/kangax/html-minifier) to minify HTML. To set properties of `html-minifier`, `HtmlWebpackPlugin` get an object in its `minify` property.
 
 ```js
@@ -79,6 +86,7 @@ new HtmlWebpackPlugin({  // Also generate a test.html
     },
 }),
 ```
+
 To use it only in Production mode:
 
 ```js
@@ -95,6 +103,7 @@ new HtmlWebpackPlugin({  // Also generate a test.html
 ```
 
 ### webpack.config.js
+
 ```js
 const path = require('path');
 const webpack =  require('webpack');
