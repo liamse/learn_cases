@@ -80,3 +80,22 @@ To change `eslint`, we need to override a role in `eslintconfig`. This can happe
 }
 ```
 
+### ENV in eslint
+Until here you will see some of eslint err like following:
+
+```text
+'window' is not defined
+'document' is not defined
+```
+
+We need to specify environment of code to ESlint know global variables.
+
+```json
+"esconfig": {
+    ...
+    "env": {
+      "browser": true,
+      "node": true,
+    }
+}
+```
