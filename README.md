@@ -9,5 +9,6 @@
 - webpack-react
     - Webpack confgiguration to use React
 - webpack-typescript
-    - Webpack and TypeScript configuration to use with React
-
+    - Webpack and TypeScript configuration to use React
+- webpack-eslint
+    - Webpack and ESlint configuration to use ESLint.
