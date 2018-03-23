@@ -12,3 +12,5 @@
     - Webpack and TypeScript configuration to use React
 - webpack-eslint
     - Webpack and ESlint configuration to use ESLint.
+- webpack-jest
+    - How to run Jest to test
