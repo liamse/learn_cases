@@ -1,11 +1,15 @@
 ## Workbox
+
 [WorkBox](https://developers.google.com/web/tools/workbox/get-started/webpack) is a library that Google team developed to fasilitate using service workers.
 
 ### Requirement Modules
+
 ```js
     "workbox-webpack-plugin": "^2.1.3"
 ```
+
 ### Webpack Configuration that added
+
 ```js
 const workboxPlugin = require('workbox-webpack-plugin');
     // ...
@@ -28,7 +32,9 @@ const workboxPlugin = require('workbox-webpack-plugin');
         })
     ]
 ```
+
 ### Register Service Worker
+
 ```js 
     function init(){
         // ...
@@ -44,13 +50,17 @@ const workboxPlugin = require('workbox-webpack-plugin');
         }
     }
 ```
+
 ### dist/ Folder structure
+
 YOUR_MODULE_FOLDER
     |- dist
         |- sw.js
         |- workbox-sw.prod.vX.X.X.js
         |- workbox-sw.rod.vX.X.X.js.map
+
 ### complete webpack.conf.js
+
 ```js
 const path = require('path');
 const webpack =  require('webpack');
@@ -108,27 +118,36 @@ module.exports = {
             dry: false,
         }),
         new ExtractTextPlugin('css/style.[chunkhash].css'),
-        
         new HtmlWebpackPlugin({  // Also generate a test.html
             template: path.join(process.cwd(), 'src/index.html')
         }),
-        //Service worker with workbox
-        new workboxPlugin({
-            globDirectory: '',
-            globPatterns: ['**/*.{html,js,css}'],
-            swDest: path.join('dist','sw.js'),
-            clientsClaim: true,
-            skipWaiting: true,
-            // runtimeCaching: [
-            //     {
-            //         urlPattern: new RegExp('dist/'),
-            //         handler: 'distFolder'
-            //     }
-            // ]
-        })
+        // Service worker with workbox
+        // after use webpack-dev-server, we find out we need to change this, then I comment this and add the new one. 
+        // new workboxPlugin({
+        //     globDirectory: '',
+        //     globPatterns: ['**/*.{html,js,css}'],
+        //     swDest: path.join('dist','sw.js'),
+        //     clientsClaim: true,
+        //     skipWaiting: true,
+        //     // runtimeCaching: [
+        //     //     {
+        //     //         urlPattern: new RegExp('dist/'),
+        //     //         handler: 'distFolder'
+        //     //     }
+        //     // ]
+        // })
+        new WorkboxPlugin({
+            globDirectory: './dist',
+            globPatterns: ['./*.{js,png,html,css}'],
+            swDest: 'dist/sw.js'
+        }),
     ],
     devtool: 'source-map',
 };
+/**
+ * 
+ * PRODUCTION
+ * */
 //add this when we webpack in production mode
 if (inProduction){
     //uglify, in other means minify the javascript files.
@@ -149,7 +168,5 @@ if (inProduction){
             //glob.sync create a list of fiels recursively
             minimize: inProduction,
         }))
-    
-
 }
 ```
