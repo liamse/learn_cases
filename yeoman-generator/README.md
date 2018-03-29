@@ -39,5 +39,29 @@ It create these direcotry structure:
     └── app.js
 ```
 
-## Manually create directory structure of generator
+**Good Point:** it creates README.md files that explain how your generator can be install and some information about licences and dependencies.
 
+**Eslint error:** if you run `npm run test` in version `4.0.2` it raise an error as following:
+
+```bash
+/generators/app/index.js
+  10:13  error  Replace ``Welcome·to·the·flawless·${chalk.red('generator-basic-type-script')}·generator!`` with `⏎········`Welcome·to·the·flawless·${chalk.red('generator-basic-type-script')}·generator!`⏎······`  prettier/prettier
+```
+
+It can be fix automatically. Or you can convert it to this:
+
+```js
+    yosay(
+    `Welcome to the flawless ${chalk.red('generator-basic-type-script')} generator!`
+    )
+```
+
+## Running the generator
+
+In your generator root folder run follwing code: 
+
+```bash
+npm link
+```
+
+Then the Yeoman know your generator as normal generators. Create your new project directory and into it run `yo your_generator`. To find more information as I mention before in **Good Point** you have a good explanation of how to work with your generator.
