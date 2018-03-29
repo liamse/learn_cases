@@ -9,7 +9,7 @@ How to use `facebook jest` to test through webpack.
     "jest": "^22.4.3",
     "babel-jest": "^22.4.3",
     "eslint-plugin-jest": "^21.15.0",
-
+    "ts-jest": "^22.4.2",
 ```
 
 ### Webpack Configuration
@@ -52,7 +52,7 @@ How to use `facebook jest` to test through webpack.
   }
  ```
 
-### Mathcers
+### Matchers
 
 When you're writing tests, you often need to check that values meet certain conditions. expect gives you access to a number of "matchers" that let you validate different things.
 
