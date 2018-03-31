@@ -15,7 +15,7 @@ yo generator:subgenerator <name>
 
 ```
 
-I do both of them. By wizard, it ask some questions that I mention some of important of them.First, `**Your Generator Name** (generator-<YOUR_EXISTING_FOLDER_NAME>)`. I must start my generator name with `generator` and seperate them with dash line (`-`). Camel words type is automatically convert to dash line words and lowercase all of them. Second, It ask about `Description`. Next, It ask; `Project home page url`. I don't have any, then for start I use my github page. Then `Auther's Name ()`. This can be a list of names and github profile addresses I guess. Then `Send coverage reports to coveralls?`, this question related to [coveralls](https://coveralls.io/) website. It shows which parts of your code aren't coverd by your test suite. As I want to test it. I say `Yes`. And It ask me my `gihub username`. Finally choose your `Lisence`.
+In first method - `yo generator`- it ask some questions that I mention some of the important of them. First, `**Your Generator Name** (generator-<YOUR_EXISTING_FOLDER_NAME>)`. I must start my generator name with `generator` and seperate them with dash line (`-`). Camel words type is automatically convert to dash line words and lowercase all of them. Second, It ask about `Description`. Next, It ask; `Project home page url`. I don't have any, then for start I use my github page. Then `Auther's Name ()`. This can be a list of names and github profile addresses I guess. Then `Send coverage reports to coveralls?`, this question related to [coveralls](https://coveralls.io/) website. It shows which parts of your code aren't coverd by your test suite. As I want to test it. I say `Yes`. And It ask me my `github username`. Finally choose your `Lisence`.
 
 It create these direcotry structure:
 
@@ -58,10 +58,33 @@ It can be fix automatically. Or you can convert it to this:
 
 ## Running the generator
 
-In your generator root folder run follwing code: 
+In your generator root folder run follwing code:
 
 ```bash
 npm link
 ```
 
 Then the Yeoman know your generator as normal generators. Create your new project directory and into it run `yo your_generator`. To find more information as I mention before in **Good Point** you have a good explanation of how to work with your generator.
+
+### How to work with writing() function
+
+```js
+ writing() {
+    const pkgJson = {
+        devDependencies: {
+            eslint: "^3.15.0"
+        },
+        dependencies: {
+            react: "^16.2.0",
+        },
+        scripts: {
+            test: "test,
+        }
+    };
+
+    this.fs.extendJSON(
+      this.destinationPath(),
+      pkgJson
+    );
+  }
+```
