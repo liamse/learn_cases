@@ -88,3 +88,9 @@ Then the Yeoman know your generator as normal generators. Create your new projec
     );
   }
 ```
+
+### Yeoman: basic-type-script generator
+
+`basic-type-scrip` is a yeoman generator. It use `webpack` and `TypeScript`. It is a very small `npm` project that does not use `gulp`. It must be simple to only use when I want to test a little project. Yeoman generotr is best choise for me.
+
+As webserver I like to use python simple webserver.
