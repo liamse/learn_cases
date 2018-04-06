@@ -66,7 +66,11 @@ npm link
 
 Then the Yeoman know your generator as normal generators. Create your new project directory and into it run `yo your_generator`. To find more information as I mention before in **Good Point** you have a good explanation of how to work with your generator.
 
-### How to work with writing() function
+## Manage dependencies with `package.json`
+
+You just need to create a variable as same as `package.json` file. `fs` module can read and write it to destination folder as a `package.json` file. `npmInstall` function install all dependencies and dev dependencies.
+
+For example you want to install `eslint` as dev dependency and `react` as dependency. 
 
 ```js
  writing() {
@@ -77,17 +81,21 @@ Then the Yeoman know your generator as normal generators. Create your new projec
         dependencies: {
             react: "^16.2.0",
         },
-        scripts: {
-            test: "test"
-        }
-    };
 
+    };
+    // Create package.json file in destination path with pkgJson content
     this.fs.extendJSON(
-      this.destinationPath(),
+      this.destinationPath('package.json'),
       pkgJson
     );
   }
+
+  install() {
+    this.npmInstall();
+  }
 ```
+
+This is equvalent to call `npm install` on created `package.json` file.
 
 ### Yeoman: basic-type-script generator
 
