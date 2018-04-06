@@ -78,7 +78,7 @@ Then the Yeoman know your generator as normal generators. Create your new projec
             react: "^16.2.0",
         },
         scripts: {
-            test: "test,
+            test: "test"
         }
     };
 
