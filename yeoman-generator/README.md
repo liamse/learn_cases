@@ -97,6 +97,8 @@ For example you want to install `eslint` as dev dependency and `react` as depend
 
 This is equvalent to call `npm install` on created `package.json` file.
 
+`yarnInstall()` can be used instead of `npmInstall()`. If you rather `yarn`, it need to aware about `yarn` cache management. It creates the `yarn.lock` and if you change `package.json` it uses its caches and does not change anything.
+
 ### Yeoman: basic-type-script generator
 
 `basic-type-scrip` is a yeoman generator. It use `webpack` and `TypeScript`. It is a very small `npm` project that does not use `gulp`. It must be simple to only use when I want to test a little project. Yeoman generotr is best choise for me.
