@@ -97,9 +97,52 @@ For example you want to install `eslint` as dev dependency and `react` as depend
 
 This is equvalent to call `npm install` on created `package.json` file.
 
-`yarnInstall()` can be used instead of `npmInstall()`. If you rather `yarn`, it need to aware about `yarn` cache management. It creates the `yarn.lock` and if you change `package.json` it uses its caches and does not change anything.
+`yarnInstall()` can be used instead of `npmInstall()`. If you rather `yarn`, it need to aware about `yarn` cache management. It creates the `yarn.lock` and if you change `package.json`, it caches and does not change anything.
 
-### Yeoman: basic-type-script generator
+### Extends existing package.json
+
+I have a `package.json` and only want to change some of attributes of it for new project. For example, for each new project I only want to change `name`. To do it with this method I require to open `package.json` and extend it. [deep-extend](https://github.com/unclechu/node-deep-extend) is a good library to help in this version. To find a good example you can see [generator-generator](https://github.com/yeoman/generator-generator/blob/master/app/index.js) own repository.
+
+```js
+const extend = require('deep-extend');
+
+// ...
+
+prompting() {
+    const prompts = [
+      {
+        type: 'input',
+        name: 'projectName',
+        message: 'Your Project Name Name?',
+        default: ''
+      },
+    ];
+
+    return this.prompt(prompts).then(props => {
+      // To access props later use this.props.gitUserName;
+      this.props = props;
+    });
+  }
+
+writing() {
+    const pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
+    extend(pkg, {
+      name: this.props.projectName,
+      dependencies: {
+        react: "^16.2.0",
+      },
+      devDependencies: {
+        eslint: "^3.15.0"
+      }
+    });
+    this.fs.writeJSON(this.destinationPath('package.json'), pkg);
+  }
+
+```
+
+You see we read `package.json` file from `destinationPath` and extend it with `deep-extend` library to add our dependencies and name that get from user with `prompts`.
+
+## Yeoman: basic-type-script generator
 
 `basic-type-scrip` is a yeoman generator. It use `webpack` and `TypeScript`. It is a very small `npm` project that does not use `gulp`. It must be simple to only use when I want to test a little project. Yeoman generotr is best choise for me.
 
