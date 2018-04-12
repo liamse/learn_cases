@@ -63,24 +63,32 @@ Do not confuse `expect()` and `expect`. `expect` is an object of functions that 
 
 These 31 functions can categories in seven categories.
 
+- Work with being
+- Work with numbers
+- Work with existing/defining
+- Work with objects/arrays
+- Work with functions
+- Work with Throw Errors
+- Work with snapshots
+
 ```text
 expect()
   |-not [object]
   |-rejects [object]
   |-resolves (object)
   |-itself
-      |-Main tests
+      |-Work with being
         |-toBe: [Function: throwingMatcher]
         |-toEqual: [Function: throwingMatcher],
         |-toMatch: [Function: throwingMatcher],
         |-toMatchObject: [Function: throwingMatcher],
-      |-To Work With Numbers
+      |-Work With Numbers
         |-toBeCloseTo: [[Function: throwingMatcher]
         |-toBeGreaterThan: [Function: throwingMatcher]
         |-toBeGreaterThanOrEqual: [Function: throwingMatcher]
         |-toBeLessThan: [Function: throwingMatcher],
         |-toBeLessThanOrEqual: [Function: throwingMatcher],
-      |-To Test Existing/Defining
+      |-Work With Existing/Defining
         |-toBeDefined: [Function: throwingMatcher]
         |-toBeFalsy: [Function: throwingMatcher]
         |-toBeInstanceOf: [Function: throwingMatcher],
@@ -88,12 +96,12 @@ expect()
         |-toBeNull: [Function: throwingMatcher],
         |-toBeTruthy: [Function: throwingMatcher],
         |-toBeUndefined: [Function: throwingMatcher],
-      |-To Work With Objects/Arrays
+      |-Work With Objects/Arrays
         |-toContain: [Function: throwingMatcher],
         |-toContainEqual: [Function: throwingMatcher],
         |-toHaveLength: [Function: throwingMatcher],
         |-toHaveProperty: [Function: throwingMatcher],
-      |-To Work With Function
+      |-Work With Functions
         |-lastCalledWith: [Function: throwingMatcher],
         |-toBeCalled: [Function: throwingMatcher],
         |-toBeCalledWith: [Function: throwingMatcher],
@@ -101,10 +109,10 @@ expect()
         |-toHaveBeenCalledTimes: [Function: throwingMatcher],
         |-toHaveBeenCalledWith: [Function: throwingMatcher],
         |-toHaveBeenLastCalledWith: [Function: throwingMatcher],
-      |-To Test Errors
+      |-Work With Throw Errors
         |-toThrow: [Function: throwingMatcher],
         |-toThrowError: [Function: throwingMatcher],
-      |-To Work With Snapshots
+      |-Work With Snapshots
         |-toMatchSnapshot: [Function: throwingMatcher],
         |-toThrowErrorMatchingSnapshot: [Function: throwingMatcher] 
 
