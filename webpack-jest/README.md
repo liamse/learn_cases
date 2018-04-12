@@ -56,7 +56,7 @@ How to use `facebook jest` to test through webpack.
 
 When you're writing tests, you often need to check that values meet certain conditions. expect gives you access to a number of "matchers" that let you validate different things.
 
-`expect()` has 31 functions that repeat in four category. `not`, `rejects`, `resolves` and itself. `rejects` and `resolves` added after `jest@20.0.0`. They use to test `Promise.resolve` and `Promise.reject`.For example, concider `expect().toBe()` function, it repeats under `not`, `rejects`, and `resolves` objects as well.
+`expect()` has 31 functions that repeat in four category. `not`, `rejects`, `resolves` and itself. `rejects` and `resolves` added after `jest@20.0.0`. They use to test `Promise.resolve` and `Promise.reject`. For example, concider `expect().toBe()` function, it repeats under `not`, `rejects`, and `resolves` objects as well.
 We need to only learn one category.
 
 Do not confuse `expect()` and `expect`. `expect` is an object of functions that we mention them at next section.
