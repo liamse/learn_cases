@@ -110,8 +110,9 @@ expect()
 
 ```
 
-### `expect` object
-if you look at `expect` itself you see these functions:
+### `expect` as object (not expect() function)
+
+If you look at `expect` itself you see these functions:
 
 ```js
 {
