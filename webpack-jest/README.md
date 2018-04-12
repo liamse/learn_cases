@@ -1,9 +1,9 @@
-### Jest
+# Jest
 
 How to use `facebook jest` to test through webpack.
 [Facebook](https://facebook.github.io/jest/docs/en/webpack.html) wrote a documnet about how to use Jest with Webpack.
 
-### Requirement Modules
+## Requirement Modules
 
 ```json
     "jest": "^22.4.3",
@@ -12,7 +12,7 @@ How to use `facebook jest` to test through webpack.
     "ts-jest": "^22.4.2",
 ```
 
-### Webpack Configuration
+## Webpack Configuration
 
 ```json
 "scripts": {
@@ -21,7 +21,7 @@ How to use `facebook jest` to test through webpack.
 
 ```
 
-### eslint configuration
+## eslint configuration
 
 ```json
   "eslintConfig": {
@@ -52,7 +52,7 @@ How to use `facebook jest` to test through webpack.
   }
  ```
 
-### Matchers
+## Matchers
 
 When you're writing tests, you often need to check that values meet certain conditions. expect gives you access to a number of "matchers" that let you validate different things.
 
@@ -61,15 +61,16 @@ We need to only learn one category.
 
 Do not confuse `expect()` and `expect`. `expect` is an object of functions that we mention them at next section.
 
-These 31 functions can categories in seven categories.
+These 31 functions can categories in eight categories.
 
-- Work with being
-- Work with numbers
-- Work with existing/defining
-- Work with objects/arrays
+- Work with being (Common Matchers)
+- Work with numbers (Numbers)
+- Work With Strings (Strings)
+- Work with existing/defining (Truthiness)
+- Work with objects/arrays (Arrays)
 - Work with functions
-- Work with Throw Errors
-- Work with snapshots
+- Work with throw errors (Exceptions)
+- Work with Snapshots
 
 ```text
 expect()
@@ -80,8 +81,9 @@ expect()
       |-Work with being
         |-toBe: [Function: throwingMatcher]
         |-toEqual: [Function: throwingMatcher],
-        |-toMatch: [Function: throwingMatcher],
         |-toMatchObject: [Function: throwingMatcher],
+      |-Work With Strings
+        |-toMatch: [Function: throwingMatcher],
       |-Work With Numbers
         |-toBeCloseTo: [[Function: throwingMatcher]
         |-toBeGreaterThan: [Function: throwingMatcher]
@@ -118,34 +120,37 @@ expect()
 
 ```
 
-### `expect` as object (not expect() function)
+## `expect` as object (not expect() function)
 
 If you look at `expect` itself you see these functions:
 
 ```js
 {
-  //  The expect Function that we discused before
   [Function: expect]
-  //  To extend extend itself, write new Matchers
+  //  The expect Function that we discused before
   extend: [Function],
-
+  //  To extend extend itself, write new Matchers
   anything: [Function],
+  // expect.anything() matches anything but null or undefined.
   any: [Function],
-  //  Work with Objects
+  // This is like jasmine.any(String). When you whant to check the value of something is string but don't care about what it exactly was, like when you want to check ID of object. You know it must be string but it is randome and unique string.
   objectContaining: [Function],
-  //  Work with Arrays
+  // expect.objectContaining(object) matches any received object that recursively matches the expected properties. That is, the expected object is a subset of the received object.
   arrayContaining: [Function],
-  // Work with Strings
+  // expect.arrayContaining(array) matches a received array which contains all of the elements in the expected array. That is, the expected array is a subset of the received array.
   stringContaining: [Function],
+  // expect.stringContaining(string) matches any received string that contains the exact expected string.
   stringMatching: [Function],
-  // Work with Snapshots
+  // expect.stringMatching(regexp) matches any received string that matches the expected regexp.
   addSnapshotSerializer: [Function],
-  // Work with Errors
   assertions: [Function],
+  // verifies that a certain number of assertions are called during a test. This is often useful when testing asynchronous code, in order to make sure that assertions in a callback actually got called.
   hasAssertions: [Function],
-
+  // verifies that at least one assertion is called during a test. This is often useful when testing asynchronous code, in order to make sure that assertions in a callback actually got called.
   getState: [Function],
   setState: [Function],
   extractExpectedAssertionsErrors: [Function: extractExpectedAssertionsErrors] 
 }
 ```
+
+## Testing Asynchronous Code
