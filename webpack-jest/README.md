@@ -149,8 +149,38 @@ If you look at `expect` itself you see these functions:
   // verifies that at least one assertion is called during a test. This is often useful when testing asynchronous code, in order to make sure that assertions in a callback actually got called.
   getState: [Function],
   setState: [Function],
-  extractExpectedAssertionsErrors: [Function: extractExpectedAssertionsErrors] 
+  extractExpectedAssertionsErrors: [Function: extractExpectedAssertionsErrors]
 }
+```
+
+### expect.anything()
+
+```js
+describe('expect.anything()', () => {
+    const User = {
+        id: 'U-021-20180312' // if it is null or undefined test fails.
+    }
+    test('User should not has a null or undefined ID', () => {
+        expect(User).toEqual({
+            id: expect.anything()
+        })
+    })
+})
+```
+
+### expect.any(constractor)
+
+```js
+describe('expect.any(constractor)', () => {
+    const User = {
+        id: 'U-021-20180312' // if it is not string test fails
+    }
+    test('User should has a string ID', () => {
+        expect(User).toEqual({
+            id: expect.any(String)
+        })
+    })
+})
 ```
 
 ## Testing Asynchronous Code
