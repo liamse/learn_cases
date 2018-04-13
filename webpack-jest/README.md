@@ -3,6 +3,8 @@
 How to use `facebook jest` to test through webpack.
 [Facebook](https://facebook.github.io/jest/docs/en/webpack.html) wrote a documnet about how to use Jest with Webpack.
 
+ Jest uses Jasmine underneath. If you know Jasmine, already know a lot about Jest.
+
 ## Requirement Modules
 
 ```json
@@ -52,7 +54,54 @@ How to use `facebook jest` to test through webpack.
   }
  ```
 
+## Global Methods of Jest
+
+Global Methods can be categories in six groups. Most used are `Commons` group. `Only` and `Skip` groups only use in large tests that you want to skip one of them or only run of them. `After` and `Befor` groups are run after or befor all or each test suits. `Require` group is like `require()` function that determine the module is mock or actual. Between these six categories we need to learn `Common` group only.
+
+When I read others test files, one thing that confuse me at first time is aliases. For example, `it()` is alias for `test()`.
+
+If `x` or `f` come before `describe()`, `test()` and `it()`, it means `skip` or `only` respectively. This letters can come before aliases as well and do same job. For examle, `xit()` equal to `test.skip()`.
+
+Only aliases that we don't cover is `fit()` that equal to `test.only()`.
+
+- Afters
+  - afterAll(fn, timeout)
+  - afterEach(fn, timeout)
+- Befor
+  - beforeAll(fn, timeout)
+  - beforeEach(fn, timeout)
+- Common
+  - describe(name, fn)
+  - test(name, fn, timeout)
+    - alias: it(name, fn, timeout)
+- Only
+  - describe.only(name, fn)
+    - alias: fdescribe(name, fn)
+  - test.only(name, fn, timeout)
+    - aliases: it.only(name, fn, timeout) or fit(name, fn, timeout)
+- Skip
+  - describe.skip(name, fn)
+    - alias: xdescribe(name, fn)
+  - test.skip(name, fn)
+    - aliases: it.skip(name, fn) or xit(name, fn) or xtest(name, fn)
+- Require
+  - require.requireActual(moduleName)
+  - require.requireMock(moduleName)
+
+### describe(name, fn)
+
+describe(name, fn) creates a block that groups together several related tests in one "test suite".
+
+**This isn't required** - you can just write the test blocks directly at the top level. But this can be handy if you prefer your tests to be organized into groups.
+
+### test(name, fn, timeout)
+
+Also under the alias: `it(name, fn, timeout)`
+
+
 ## Matchers
+
+[Boris](https://medium.com/@boriscoder/the-hidden-power-of-jest-matchers-f3d86d8101b0) wrote a good article about how to use mathcers.
 
 When you're writing tests, you often need to check that values meet certain conditions. expect gives you access to a number of "matchers" that let you validate different things.
 
@@ -153,12 +202,28 @@ If you look at `expect` itself you see these functions:
 }
 ```
 
-### expect.anything()
+### asymmetricMatch
+
+`asymmetricMatch` is a special keyword. If an object has it and it refer to a function, the result of its call will be used instead of an acutal deep-equality check.
+
+```js
+const fooOrBar = {
+  asymmetricMatch: actual => actual === 'foo' || actual === 'bar'
+};
+expect('foo').toEqual(fooOrBar); // passes
+expect('bar').toEqual(fooOrBar); // passes
+expect('baz').toEqual(fooOrBar); // fails, not either 'foo' or 'bar'
+expect(fooOrBar).toEqual('foo'); // fails, works only at right side
+```
+
+Jest (actually, Jasmine) gives us a set of predefined `asymmetric matches`, for example, expect.any(\<type>) that returns true for any value with specified type.
+
+#### expect.anything()
 
 ```js
 describe('expect.anything()', () => {
     const User = {
-        id: 'U-021-20180312' // if it is null or undefined test fails.
+        id: 'U-021-20180312' // if it is null or undefined then test fails.
     }
     test('User should not has a null or undefined ID', () => {
         expect(User).toEqual({
@@ -168,12 +233,12 @@ describe('expect.anything()', () => {
 })
 ```
 
-### expect.any(constractor)
+#### expect.any(constractor)
 
 ```js
 describe('expect.any(constractor)', () => {
     const User = {
-        id: 'U-021-20180312' // if it is not string test fails
+        id: 'U-021-20180312' // if it is not string then test fails
     }
     test('User should has a string ID', () => {
         expect(User).toEqual({
@@ -183,4 +248,6 @@ describe('expect.any(constractor)', () => {
 })
 ```
 
-## Testing Asynchronous Code
+### Work With Functions
+
+
