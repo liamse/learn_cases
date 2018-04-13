@@ -56,11 +56,11 @@ How to use `facebook jest` to test through webpack.
 
 ## Global Methods of Jest
 
-Global Methods can be categories in six groups. Most used are `Commons` group. `Only` and `Skip` groups only use in large tests that you want to skip one of them or only run of them. `After` and `Befor` groups are run after or befor all or each test suits. `Require` group is like `require()` function that determine the module is mock or actual. Between these six categories we need to learn `Common` group only.
+Global Methods can be categories in six groups. Most used is `Commons` group. `Only` and `Skip` groups only use in large tests that you want to skip one of them or only run one of them. `After` and `Befor` groups are run after or befor all or each test suits. `Require` group is like `require()` function that determine the module is mock or actual. Between these six categories we need to learn `Common` group only.
 
-When I read others test files, one thing that confuse me at first time is aliases. For example, `it()` is alias for `test()`.
+I used to read perfessionals code and copy of them. When I read others test files, one thing that confuse me at first time is aliases. For example, `it()` is alias for `test()`.
 
-If `x` or `f` come before `describe()`, `test()` and `it()`, it means `skip` or `only` respectively. This letters can come before aliases as well and do same job. For examle, `xit()` equal to `test.skip()`.
+A simple note about `x` and `f` before function names is, if `x` or `f` come before `describe()`, `test()`, it means `skip` or `only` respectively. These letters can come before aliases as well and do same job. For examle, `xit()` equal to `test.skip()`.
 
 Only aliases that we don't cover is `fit()` that equal to `test.only()`.
 
