@@ -54,7 +54,11 @@ How to use `facebook jest` to test through webpack.
   }
  ```
 
-## Global Methods of Jest
+After creating environment to use Jest we need to learn it.
+
+## How to use Jest
+
+## Global Methods
 
 Global Methods can be categories in six groups. Most used is `Commons` group. `Only` and `Skip` groups only use in large tests that you want to skip one of them or only run one of them. `After` and `Befor` groups are run after or befor all or each test suits. `Require` group is like `require()` function that determine the module is mock or actual. Between these six categories we need to learn `Common` group only.
 
@@ -62,31 +66,31 @@ I used to read perfessionals code and copy of them. When I read others test file
 
 A simple note about `x` and `f` before function names is, if `x` or `f` come before `describe()`, `test()`, it means `skip` or `only` respectively. These letters can come before aliases as well and do same job. For examle, `xit()` equal to `test.skip()`.
 
-Only aliases that we don't cover is `fit()` that equal to `test.only()`.
+Only alias that we don't cover is `fit()` that equal to `test.only()`.
 
 - Afters
-  - afterAll(fn, timeout)
-  - afterEach(fn, timeout)
+  - `afterAll(fn, timeout)`
+  - `afterEach(fn, timeout)`
 - Befor
-  - beforeAll(fn, timeout)
-  - beforeEach(fn, timeout)
+  - `beforeAll(fn, timeout)`
+  - `beforeEach(fn, timeout)`
 - Common
-  - describe(name, fn)
-  - test(name, fn, timeout)
-    - alias: it(name, fn, timeout)
+  - `describe(name, fn)`
+  - `test(name, fn, timeout)`
+    - alias: `it(name, fn, timeout)`
 - Only
-  - describe.only(name, fn)
-    - alias: fdescribe(name, fn)
-  - test.only(name, fn, timeout)
-    - aliases: it.only(name, fn, timeout) or fit(name, fn, timeout)
+  - `describe.only(name, fn)`
+    - alias: `fdescribe(name, fn)`
+  - `test.only(name, fn, timeout)`
+    - aliases: `it.only(name, fn, timeout)` or `fit(name, fn, timeout)`
 - Skip
-  - describe.skip(name, fn)
-    - alias: xdescribe(name, fn)
-  - test.skip(name, fn)
-    - aliases: it.skip(name, fn) or xit(name, fn) or xtest(name, fn)
+  - `describe.skip(name, fn)`
+    - alias: `xdescribe(name, fn)`
+  - `test.skip(name, fn)`
+    - aliases: `it.skip(name, fn)` or `xit(name, fn)` or `xtest(name, fn)`
 - Require
-  - require.requireActual(moduleName)
-  - require.requireMock(moduleName)
+  - `require.requireActual(moduleName)`
+  - `require.requireMock(moduleName)`
 
 ### describe(name, fn)
 
@@ -96,8 +100,13 @@ describe(name, fn) creates a block that groups together several related tests in
 
 ### test(name, fn, timeout)
 
-Also under the alias: `it(name, fn, timeout)`
+All you need in a test file is the test method which runs a test.For example, let's say there's a function `inchesOfRain()` that should be zero. Your whole test could be:
 
+```js
+test('did not rain', () => {
+  expect(inchesOfRain()).toBe(0);
+});
+```
 
 ## Matchers
 
@@ -248,6 +257,40 @@ describe('expect.any(constractor)', () => {
 })
 ```
 
-### Work With Functions
+### Partial match for complex objects or arrays
 
+When you have a big object and only want to test some keys of it, `expect.objectContaining(object)` and `expect.arrayContaining(array)` can be helpful. 
 
+```js
+describe('expect.objectContaining(object)', () => {
+    const User = {
+        id: 'U-021-20180312',
+        name: 'Esmaeil',
+        profile: {},
+        sessionId: 'S-9834-201802941',
+    }
+    test('User should contain object with id and name', () => {
+        expect(User).toEqual(expect.objectContaining({
+            id: expect.any(String),
+            name: expect.any(String)
+        }))
+    })
+})
+
+describe('expect.objectContaining(object)', () => {
+    const Fruits = [
+        {name: 'Apple', color: 'red'},
+        {name: 'Orange', color: 'orenge'}
+    ]
+    test('Fruits should contain red apple', () => {
+        expect(Fruits).toEqual(expect.arrayContaining(
+          [{
+            name: 'Apple',
+            color: 'red'
+          }]
+        ))
+    })
+})
+```
+
+**Note:** You must provide an array to arrayContaining.
