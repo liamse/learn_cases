@@ -215,3 +215,126 @@ App.defaultProps = {
     step: 4
 }
 ```
+
+## How to create a common button
+
+`F8 App` is a best point for start. Befor it I know to create colors and fonts list. But creating my own button as a library to help me in current app and feature one is very important.
+
+`F8 App` manage it files structure to three section; `constants`, `react component`, and `playground cards`. The two first is very familiar but the `playground cards` is a very beautiful concept.
+
+```js
+// constrains ===============
+const BUTTON_HEIGHT = 52, // Normal type of button height is 52
+  BUTTON_HEIGHT_SM = 32; //Small type of button height is 32
+
+props: {
+    theme:
+      | "white"
+      | "bordered"
+      | "disabled",
+    type: "default" | "round" | "small",
+    opacity: number,
+    icon?: number,
+    caption?: string,
+    style?: any,
+    fontSize?: number,
+    onPress: () => mix  ed
+  };
+
+  static defaultProps = {
+    opacity: 1,
+    theme: "bordered"
+  };
+
+
+render() {
+    // get icon, fontSize, and opacity from props
+    const { icon, fontSize, opacity } = this.props;
+    // convert button caption to uppercase. 
+    // This can be get better. uppercase can be a prop, and if it is true, the caption get uppercase, if not, it remain as written in caption prop.
+    const caption = this.props.caption && this.props.caption.toUpperCase();
+    // the beauty of this method is here. getTheme is a function that return buttonTheme, iconTheme, and cpationThem.
+    const { buttonTheme, iconTheme, captionTheme } = this.getTheme();
+    const { containerType, buttonType, iconType, captionType } = this.getType();
+
+    let iconImage;
+    if (icon) {
+      iconImage = (
+        <Image source={icon} style={[styles.icon, iconTheme, iconType]} />
+      );
+    }
+
+    let fontSizeOverride;
+    if (fontSize) {
+      fontSizeOverride = { fontSize };
+    }
+    // This create content of TouchableOpactiy.
+    /*
+    *  ------------------------
+    * | iconImage | caption    |
+    *  ------------------------
+    **/
+    const content = (
+      <View style={[styles.button, buttonTheme, buttonType, { opacity }]}>
+        {iconImage}
+        <Text
+          style={[styles.caption, captionTheme, captionType, fontSizeOverride]}
+        >
+          {caption}
+        </Text>
+      </View>
+    );
+
+    if (this.props.onPress) {
+      return (
+        <TouchableOpacity
+          accessibilityTraits="button"
+          onPress={this.props.onPress}
+          activeOpacity={0.5}
+          style={[styles.container, containerType, this.props.style]}
+        >
+          {content}
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <View style={[styles.container, containerType, this.props.style]}>
+          {content}
+        </View>
+      );
+    }
+  }
+
+// create a list of styles for each section of button. button itselt, icon, and caption
+getTheme() {
+    // get theme that programmer choose
+    const { theme } = this.props;
+    // initiate the output
+    let buttonTheme, iconTheme, captionTheme;
+    // if programmer select theme as white, style for button set to backgrouncColor is white and so on.
+    // we can not select more than one theme. It doesn't make sense. If you want a bordered button that disable, then make a new theme.
+    if (theme === "white") {
+      buttonTheme = { backgroundColor: 'white' };
+      iconTheme = { tintColor: 'pink' };
+      captionTheme = { color: 'pink' };
+    } else if (theme === "bordered") {
+      buttonTheme = {
+        backgroundColor: "transparent",
+        borderWidth: 1,
+        borderColor: '#000000'
+      };
+      iconTheme = { tintColor: '#000000' };
+      captionTheme = { color: '#000000' };
+    } else if (theme === "disabled") {
+      buttonTheme = { backgroundColor: 'blue' };
+      iconTheme = { tintColor: 'white', opacity: 0.5 };
+      captionTheme = { color: 'white', opacity: 0.5 };
+    } else {
+      buttonTheme = { backgroundColor: 'pink' };
+      iconTheme = { tintColor: "white" };
+      captionTheme = { color: "white" };
+    }
+
+    return { buttonTheme, iconTheme, captionTheme };
+  }
+```
