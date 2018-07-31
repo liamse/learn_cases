@@ -294,3 +294,26 @@ describe('expect.objectContaining(object)', () => {
 ```
 
 **Note:** You must provide an array to arrayContaining.
+
+# Mock
+
+## Mock Return Value
+
+
+```js
+const myMock = jest.fn();
+console.log(myMock());
+// > undefined
+
+// Make the mock return `10` for the first call,
+// and `x` for the second call
+// and `true` for the rest of calls
+myMock
+  .mockReturnValueOnce(10)
+  .mockReturnValueOnce('x')
+  .mockReturnValue(true);
+
+console.log(myMock(), myMock(), myMock(), myMock());
+// > 10, 'x', true, true
+```
+
