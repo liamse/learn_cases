@@ -295,10 +295,31 @@ describe('expect.objectContaining(object)', () => {
 
 **Note:** You must provide an array to arrayContaining.
 
+# Test CallBack
+
+You can’t have a test in a callback, because Jest won’t execute it - the execution of the test file ends before the callback is called. To fix this, pass a parameter to the test function, which you can conveniently call done. Jest will wait until you call done() before ending that test: [Ref: [Testing Javascript with Jest](https://flaviocopes.com/jest/#run-jest-with-vs-code)]
+
+```js
+//uppercase.js
+function uppercase(str, callback) {
+  callback(str.toUpperCase())
+}
+module.exports = uppercase
+
+//uppercase.test.js
+const uppercase = require('./src/uppercase')
+
+test(`uppercase 'test' to equal 'TEST'`, (done) => {
+  uppercase('test', (str) => {
+    expect(str).toBe('TEST')
+    done()
+  }
+})
+```
+
 # Mock
 
 ## Mock Return Value
-
 
 ```js
 const myMock = jest.fn();
