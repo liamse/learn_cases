@@ -1,8 +1,11 @@
 ### Required Modules
+
 ```js
 "webpack-pwa-manifest": "^3.6.1",
 ```
+
 ### webpack.config.js
+
 ```js
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 //...
@@ -46,7 +49,11 @@ new WebpackPwaManifest({
 })
 ]
 ```
+
+When defining an icon object, you can also specify its output directory using a property called destination. Using `ios: true` in an icon object makes it eligible to the `apple-touch-icon` meta tag injection. Using `ios: 'startup'` in an icon object makes it eligible to the `apple-touch-startup-image` meta tag injection. [ref: webpack-pwa-manifest github](https://github.com/arthurbergmz/webpack-pwa-manifest)
+
 ### src/ Folder structure
+
 ```
 YOUR_MODUEL_FOLDER
     |- src
@@ -54,7 +61,9 @@ YOUR_MODUEL_FOLDER
             |- icons
                 |- webpack.png //(1024x1024)
 ```
+
 ### dist/ Folder structure
+
 ```
 YOUR_MODUEL_FOLDER
     |- dis
@@ -77,7 +86,9 @@ YOUR_MODUEL_FOLDER
                 |- icon_384x384.[hash number].png
                 |- icon_512x512.[hash number].png
 ```
+
 ### HTML File meta tags
+
 ```html
 <head>
 <!-- ... -->
