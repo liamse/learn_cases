@@ -20,7 +20,12 @@ new WebpackPwaManifest({
             src: path.resolve('src/assets/icons/webpack.png'),
             sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
             destination: path.join('assets', 'icons'),
-
+        },
+        {
+            src: path.resolve('src/assets/icons/webpack.png'),
+            size: 512,
+            destination: path.join('assets', 'icons', 'ios'),
+            ios: true,
         },
         {
             src: path.resolve('src/assets/icons/webpack.png'),
@@ -34,7 +39,6 @@ new WebpackPwaManifest({
             destination: path.join('assets', 'icons', 'android')
         }
     ],
-    ios: true,
     ios: {
         'apple-mobile-web-app-title': 'AppTitle',
         'apple-mobile-web-app-status-bar-style': 'black'
